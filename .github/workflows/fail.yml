@@ -1,0 +1,30 @@
+# The title
+name: 2. A Broken Workflow
+
+# The TRIGGER
+on:
+  push:
+    branches: [ main ] # Or any other branch you want to test on
+
+# The TASKS
+jobs:
+  # We'll name our job 'failing-job'
+  failing-job:
+    # The RUNNER
+    runs-on: ubuntu-latest
+
+    # The STEPS
+    steps:
+      # Step 1: This one will pass
+      - name: The First Step (It Works)
+        run: echo "This step is fine..."
+      
+      # Step 2: This one will FAIL
+      - name: The Second Step (It Fails)
+        run: |
+          echo "Oh no, something is about to break!"
+          exit 1 # This is a command that means "FAIL!"
+
+      # Step 3: This will NEVER run
+      - name: The Third Step (Skipped)
+        run: echo "I will never be printed because the job stopped."
