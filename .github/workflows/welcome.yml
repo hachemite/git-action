@@ -1,0 +1,46 @@
+# 1. Give it a name
+name: Welcome New Contributors
+
+# 2. Set the TRIGGER. This one is different!
+on:
+  # It runs when a Pull Request or Issue is "opened"
+  pull_request:
+    types: [opened]
+  issues:
+    types: [opened]
+
+# 3. Define the job
+jobs:
+  greet-new-contributor:
+    # Run on the standard machine
+    runs-on: ubuntu-latest
+
+    # Set permissions for the job
+    permissions:
+      issues: write
+      pull-requests: write
+
+    # 4. Define the steps
+    steps:
+      # This single step uses the Marketplace Action
+      - name: Post welcome comment
+        # This is the "robot" we are getting from the Marketplace
+        uses: actions/first-interaction@v1
+        with:
+          # This gives the robot a "key" to post comments
+          # GitHub creates this automatically. It is secure.
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          
+          # The message to post on a new user's first ISSUE
+          issue-message: |
+            Hello @${{ github.actor }}! 👋
+            
+            Thank you for opening your first issue in this repository. 
+            We will review it soon!
+            
+          # The message to post on a new user's first PULL REQUEST
+          pr-message: |
+            Welcome @${{ github.actor }}! 🎉
+            
+            Thanks for opening your first pull request! Our CI tests will 
+            run, and a team member will review your code shortly.
