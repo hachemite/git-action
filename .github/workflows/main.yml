@@ -1,0 +1,21 @@
+# The title of your workflow
+name: 1. Hello World Workflow
+
+# The TRIGGER: When to run this
+on:
+  push:
+    branches: [ main ] # Runs only on a push to the 'main' branch
+
+# The TASKS: What to do
+jobs:
+  # We'll name our first job 'say-hello'
+  say-hello:
+    # The RUNNER: What kind of computer to use
+    runs-on: ubuntu-latest
+
+    # The STEPS: The sequence of instructions
+    steps:
+      # Step 1: Give it a name
+      - name: Say Hello
+        # 'run:' tells the computer to run a terminal command
+        run: echo "Hello, students! 👋 This workflow ran successfully!"
