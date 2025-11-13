@@ -5,7 +5,9 @@ name: Node.js Package
 
 on:
   release:
-    types: [push]
+    types: [created]
+  push:
+    branches: [ main ] # Or any other branch you want to test on
 
 jobs:
   build:
